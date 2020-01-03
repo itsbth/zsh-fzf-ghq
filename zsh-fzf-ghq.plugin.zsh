@@ -1,7 +1,7 @@
 function ghq-fzf() {
   local target_dir=$(ghq list -p | \
 	  fzf --query="$LBUFFER" \
-	  --preview='(stat {}/README.md && highlight -O ansi {}/README.md) || ls --color=auto {}'
+	  --preview='(stat {}/README.md > /dev/null && highlight -O ansi {}/README.md) || ls --color=auto {}'
   )
 
   if [ -n "$target_dir" ]; then
