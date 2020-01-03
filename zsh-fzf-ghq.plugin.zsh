@@ -1,5 +1,8 @@
 function ghq-fzf() {
-  local target_dir=$(ghq list -p | fzf --query="$LBUFFER")
+  local target_dir=$(ghq list -p | \
+	  fzf --query="$LBUFFER" \
+	  --preview='(stat {}/README.md && highlight -O ansi {}/README.md) || ls --color=auto {}'
+  )
 
   if [ -n "$target_dir" ]; then
     BUFFER="cd ${target_dir}"
